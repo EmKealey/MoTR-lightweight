@@ -41,7 +41,7 @@ const cond = ref(params.get('assignedCondition') || '')
         <p>
           Welcome to Emma's Demo experiment. Please read the following information carefully. If you have any questions, feel free to contact us.
         <br>
-          <b>What is the study about?</b> You will be participating in a study conducted by the Digital Linguistics Group at the University of Zurich. This research will help us understand how people read.
+          <b>What is the study even about??</b> You will be participating in a study conducted by the Digital Linguistics Group at the University of Zurich. This research will help us understand how people read.
         <br><br>
           <b>What do I need to do?</b> You will use the computer mouse to read sentences in English and answer questions about them.
         <br><br>
