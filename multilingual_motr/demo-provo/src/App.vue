@@ -18,7 +18,7 @@
         <p>
           We would like to ask you if you are willing to participate in our research project. Your participation is voluntary. Please read the text below carefully and ask the conducting person about anything you do not understand or would like to know.
         <br><br>
-          <b>What is investigated and how?</b> You are being asked to take part in a research study being done by Ethan Wilcox, a researcher at the Swiss Federal Institute of Technology. This study will help us learn about how people read. It will take you around 20 minutes to complete.
+          <b>What is investigated   and how?</b> You are being asked to take part in a research study being done by Ethan Wilcox, a researcher at the Swiss Federal Institute of Technology. This study will help us learn about how people read. It will take you around 20 minutes to complete.
         <br><br>
           <b>Who can participate?</b> You can participate only if you are an adult native speaker of English.
         <br><br>
