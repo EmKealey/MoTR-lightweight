@@ -16,7 +16,7 @@ const cond = ref(params.get('assignedCondition') || '')
 <template>
   <Experiment title="Mouse tracking for Reading" translate="no">
     <Screen title="Confirm your Prolific ID" class="instructions">
-      <p>Welcome to the experiment! Please enter your Prolific ID to continue.</p>
+      <p>Welcome to the experiment! Hi Please enter your Prolific ID to continue.</p>
       <h1>{{ pid }}</h1>
   <input v-model="pid" />
   <input v-model="cond" />
