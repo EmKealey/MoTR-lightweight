@@ -1,13 +1,40 @@
 <!-- Window is fixed, 102px, pointer cursor, gradual blurry effect on surrounding words. -->
 <!--  Comprehension questions appear afterwards in the same slide -->
 <script setup>
+  window.onload = function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const prolificID = urlParams.get('prolificID2');
+
+    if (prolificID) {
+      // Update Magpie data
+      if (window.$magpie && window.$magpie.measurements) {
+        window.$magpie.measurements.SubjectID = prolificID;
+      }
+
+      // Also directly update the input field
+      const input = document.querySelector('input[name="TurkID"]');
+      if (input) {
+        input.value = prolificID;
+      }
+    }
+  };
+
 import { ref } from 'vue'
 
 // Get query parameters from current URL
 const params = new URLSearchParams(window.location.search)
+const urlParams = new URLSearchParams(window.location.search);
+  const prolificID = urlParams.get('prolificID');
+  const pid = ref(params.get('prolificID2') || '')
+  // If it exists, store it in magpie
+  if (pid) {
+    window.$magpie = window.$magpie || {};
+    window.$magpie.measurements = window.$magpie.measurements || {};
+    window.$magpie.measurements.SubjectID = pid;
+  }
 
 // Create reactive variables
-const pid = ref(params.get('ProlificID') || '')
+
 const cond = ref(params.get('assignedCondition') || '')
 </script>
 </script>
@@ -28,7 +55,7 @@ const cond = ref(params.get('assignedCondition') || '')
     </Screen>
 
     <Screen :title="'welcome'" class="instructions" :validations="{
-        SubjectID: {
+        pid: {
           minLength: $magpie.v.minLength(2)
         }
       }">
@@ -65,7 +92,7 @@ const cond = ref(params.get('assignedCondition') || '')
         <br>
 
         <tr>
-          <td>Please enter your Prolific ID to continue:&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
+          <td>Please enter your Prolific ID to continue:&nbsp</td><td> <input v-model="pid"/></td>
         </tr>
         <tr></tr>
 

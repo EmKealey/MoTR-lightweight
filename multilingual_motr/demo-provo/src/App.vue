@@ -4,7 +4,7 @@
 <template>
   <Experiment title="Mouse tracking for Reading" translate="no">
 
-    <Screen :title="'Welcome'" class="instructions" :validations="{
+    <Screen :title="'welcome'" class="instructions" :validations="{
         SubjectID: {
           minLength: $magpie.v.minLength(2)
         }
@@ -13,59 +13,45 @@
         <div style="width: 90%; margin: auto;">
 
         <div style="background-color: lightgrey; padding: 10px;">
-            <b> Information About this Study </b>
+          <b>Information About this study </b>
         </div>
         <p>
-          We would like to ask you if you are willing to participate in our research project. Your participation is voluntary. Please read the text below carefully and ask the conducting person about anything you do not understand or would like to know.
-        <br><br>
-          <b>What is investigated   and how?</b> You are being asked to take part in a research study being done by Ethan Wilcox, a researcher at the Swiss Federal Institute of Technology. This study will help us learn about how people read. It will take you around 20 minutes to complete.
-        <br><br>
-          <b>Who can participate?</b> You can participate only if you are an adult native speaker of English.
-        <br><br>
-         <b>What am I supposed to do as a participant?</b> If you choose to be in the study, you will use the computer mouse to read sentences in English and answer questions about them.
-        <br><br>
-          <b>What are my rights during participation?</b> Your participation in this study is voluntary. If you choose to participate, you may change your mind and leave the study at any time by closing the web page without specifying reasons and without any disadvantages.
-        <br><br>
-          <b>What risks and benefits can I expect?</b> There are no foreseeable risks for participating in this study.
-        <br><br>
-          <b>Will I be compensated for participating?</b> If you participate you will be compensated for your time following the amount specified on prolific.co.
-        <br><br>
-          <b>What data is collected from me and how is it used?</b> During this study, we will track the position of your mouse on screen. The data from this study may be presented at scientific conferences and published in scientific journals, as well as in online repositories. All data will remain anonymous. Members of the ETH Zurich Ethics Commission may access the original data for examination purposes. Strict confidentiality will be observed at any time.
-        <br><br>
-          <b> What are my rights to my personal data? </b> You can request information about the personal data collected from you at any time and without giving reasons. You can also request that it be rectified, handed over to you, barred for processing or erased. To do so, please contact the person indicated below.
-        <br><br>
-          <b>Who funds this study?</b> This study is funded by an ETH Postdoctoral Fellowship grant, awarded to Ethan Wilcox.
-        <br><br>
-          <b> How am I insured? </b> Although there are no foreseeable risks for participation, any adverse health effects that are directly caused by a study and can be demonstrated to be attributable to fault on the part of the project team or ETH Zurich are covered by ETH's liability insurance.
-        <br><br>
-          <b> Who reviewed this study?  </b> This study was examined by the ETH Zurich Ethics Commission as proposal EK 2023-N-03
-
-        <br><br>
-          <b> Complaints Office:</b> The secretariat of the ETH Zurich Ethics Committee is available to help you with complaints in connection with your participation. Contact: ethics@sl.ethz.ch or 0041 44 632 85 72.
-        <br><br>
-          <b> General Contact: </b> Ethan Gotlieb Wilcox, Department of Computer Science, ETH Zurich, OAS K.20, Binzmühlestrasse 13, 8050 Zürich, Switzerland, ethan.wilcox@inf.ethz.ch <br>
+           Please read the text below carefully.
+          <br><br>
+            <b>What is investigated and how?</b> This study will help us learn about how people read. It will take you around 15 minutes to complete.
+          <br><br>
+            <b>Who can participate?</b> You can participate only if you are an adult native speaker of English.
+          <br><br>
+          <b>What am I supposed to do as a participant?</b> In this study, you will use the computer mouse to read sentences in English and answer questions about them.
+          <br><br>
+            <b>What are my rights during participation?</b> Your participation in this study is voluntary. If you choose to participate, you may change your mind and leave the study at any time by closing the web page.
+          <br><br>
+            <b>Will I be compensated?</b> If you complete the study, you will be compensated with the amount specified on prolific.co.
+          <br><br>
+            <b>What data is collected from me and how is it used?</b> During this study, we will track the position of your mouse on screen. The data from this study may be presented at scientific conferences and published in scientific journals, as well as in online repositories. All data will remain anonymous.
+          <br><br>
+            <b> What are my rights to my personal data? </b> You can request information about the personal data collected from you at any time and without giving reasons. You can also request that it be rectified, handed over to you, barred for processing or erased. To do so, please contact us via prolific messages.
         </p>
 
         <br>
         <div style="background-color: lightgrey; padding: 10px;">
-            <b> Consent Form </b>
+          <b> Consent Form </b>
         </div>
         <br>
-        I, the participant, confirm by clicking the button below: <br>
-        <div style="padding-left: 30px"> • I have read and understood the study information. My questions have been answered completely and to my satisfaction. </div>
-        <div style="padding-left: 30px">• I comply with the inclusion and exclusion criteria for participation described above. I am aware of the requirements and restrictions to be observed during the study. </div>
-        <div style="padding-left: 30px">• I have had enough time to decide about my participation. </div>
-        <div style="padding-left: 30px">• I participate in this study voluntarily and consent that my personal data be used as described above.</div>
-        <div style="padding-left: 30px">• I understand that I can stop participating at any moment.</div>
+          I, the participant, confirm by clicking the button below: <br>
+          <div style="padding-left: 30px"> • I have read and understood the study information. My questions have been answered completely and to my satisfaction. </div>
+          <div style="padding-left: 30px">• I comply with the inclusion and exclusion criteria for participation described above. I am aware of the requirements and restrictions to be observed during the study. </div>
+          <div style="padding-left: 30px">• I have had enough time to decide about my participation. </div>
+          <div style="padding-left: 30px">• I participate in this study voluntarily and consent that my personal data be used as described above.</div>
+          <div style="padding-left: 30px">• I understand that I can stop participating at any moment.</div>
         <br>
 
-          <tr>
-          <td>Please enter your Prolific ID to continue:&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
-          </tr>
-          <tr>
+        <tr>
+          <td>Please enter your Prolific ID or any string to continue:&nbsp</td><td><input name="ProlID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
+        </tr>
+        <tr></tr>
 
-          </tr>
-          </div>
+        </div>
           <div v-if="
             $magpie.measurements.SubjectID&&
             !$magpie.validateMeasurements.SubjectID.$invalid
@@ -77,208 +63,283 @@
             Proceed
           </button>
 
-          </div>
-        </Screen>
+        </div>
+     </Screen>
 
-
-    <InstructionScreen :title="'Instruction'">
-     <div style="width: 90%; margin: auto;">
-<!-- 
-      <p>Please use the "Fullscreen Mode" for the duration of the experiment:
-        <a href="javascript:void(0)" @click="turnOnFullScreen">Fullscreen Mode</a>
-      </p>
- -->
-      <p>In this study, you will read short texts and answer questions about them. However, unlike in normal reading, the texts will be blurred. In order to bring the text into focus move your mouse over it. Take as much time to read the text as you need in order to understand it. When you are done reading, answer the question at the bottom and click “next” to move on.</p>
-    </div>
+     <InstructionScreen :title="'Instructions'" :button-text="'Continue'">
+      <div style="width: 80%; margin: auto;">
+        <p></p>
+        <p>In this study, you will read short texts and answer questions about them. However, unlike in normal reading, the texts will be blurred. In order to bring the text into focus move your mouse over it. Take as much time to read the text as you need in order to understand it. When you are done reading, answer the question at the bottom and click “next” to move on.</p>
+        <p>Let’s get started!</p>
+      </div>
     </InstructionScreen>
 
     <template v-for="(trial, i) of trials">
       <Screen :key="i" class="main_screen" :progress="i / trials.length">
-        <Slide>
+        <Slide class="text_slide">
           <form>
             <input type="hidden" class="item_id" :value="trial.item_id">
-            <input type="hidden" class="experiment_id" :value="trial.experiment_id">
             <input type="hidden" class="condition_id" :value="trial.condition_id">
+            <input type="hidden" class="list" :value="trial.group">
+            <input type="hidden" class="question_type" :value="trial.question_type">
           </form>
           <div class="oval-cursor"></div>
           <template>
-            <div v-if="showFirstDiv" class="readingText" @mousemove="moveCursor" @mouseleave="changeBack">
+            <div v-if="hasStarted" class="readingText" style= "top:5%;" @mousemove="moveCursor" @mouseleave="changeBack">
               <template v-for="(word, index) of trial.text.split(' ')">
                 <span :key="index" :data-index="index" >
                   {{ word }}
                 </span>
               </template>
             </div>
-            <div class="blurry-layer" style="opacity: 0.3; filter: blur(3.5px); transition: all 0.3s linear 0s;"> 
+            <div v-if="hasStarted" class="blurry-layer" style="opacity: 0.3; filter: blur(3.5px); transition: all 0.3s linear 0s; top:5%;"> 
               {{trial.text}}
             </div>
           </template>
-          <button v-if="showFirstDiv" style= "bottom:40%; transform: translate(-50%, -50%)" @click="toggleDivs" :disabled="!isCursorMoving">
-          Done
+          <!-- Start button -->
+          <button style="bottom:78%; left: -5%; transform: translate(-50%, -50%)" @click="startReading" v-if="!hasStarted">
+            Start
           </button>
 
-          <div v-else style = "position:absolute; bottom:15%; text-align: center; width: 100%; min-width: -webkit-fill-available;" >
-            <template>
-              <form>
-                <!-- comprehension questions and the response options -->
-                <div>{{ trial.question.replace(/ ?["]+/g, '') }}</div>
-                <template v-for='(word, index) of trial.response_options'>
-                  <input :id="'opt_'+index" type="radio" :value="word" name="opt" v-model="$magpie.measurements.response"/>{{ word }}<br/>
-                    <!-- <label :for="'opt_'+index"> {{ word }}&nbsp</label> -->
-                </template>
-              </form>
-            </template>
+          <button v-if="hasStarted" style= "bottom:65%; left: 95%; transform: translate(-50%, -50%)" @click="handleRCQButton" :disabled="!hasRevealed">
+            Done
+          </button>
+        </Slide>
+
+        <Slide class="question_slide">
+          <div class="radio-options" style="padding-top: 4%;">
+            <form>
+              <!-- comprehension questions and the response options -->
+              <div>{{ trial.question }}</div>
+              <template v-for='(option, index) of trial.response_options'>
+                <label style="cursor:pointer; user-select:none; border:1px solid #ccc; border-radius:8px; padding:14px 22px; display:inline-flex; align-items:center;margin-right:12px;">
+                  <input type="radio" :value="option" name="opt" v-model="$magpie.measurements.response" style="display:none;">
+                  <span style="display:block;">{{ option }}</span>
+                </label>
+              </template>
+            </form>
           </div>
-          
-          <button v-if="$magpie.measurements.response" style="transform: translate(-50%, -50%)" @click="toggleDivs(); $magpie.saveAndNextScreen()">
+
+          <button v-if="$magpie.measurements.response" style="transform: translate(-50%, -50%); bottom:55%" @click="$magpie.saveAndNextScreen()">
             Next
           </button>
         </Slide>
       </Screen>
     </template>
-<Screen>
-  <p>1. Which input device are you using for this experiment?</p>
-    <MultipleChoiceInput
-        :response.sync= "$magpie.measurements.device"
-        orientation="horizontal"
-        :options="['Computer Mouse', 'Computer Trackpad', 'Other']" />
-  <br>
-  <br>
-  <p>2. Which hand are you using during this experiment?</p>
-    <MultipleChoiceInput
-        :response.sync= "$magpie.measurements.hand"
-        orientation="horizontal"
-        :options="['Left', 'Right', 'Both']" />
-  <button style= "bottom:30%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">Submit</button>
-</Screen>
+
+    <Screen>
+      <p>1. Which input device are you using for this experiment?</p>
+        <MultipleChoiceInput
+            :response.sync= "$magpie.measurements.device"
+            orientation="horizontal"
+            :options="['Mouse', 'Trackpad', 'Stylus', 'Other']" />
+      <br>
+      <br>
+      <p>2. What operating system did you use during this experiment?</p>
+        <MultipleChoiceInput
+            :response.sync="$magpie.measurements.os"
+            orientation="horizontal"
+            :options="['Microsoft Windows', 'Apple macOS', 'Other']" />
+      <button style= "bottom: 5%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">Next</button>
+    </Screen>
+
+    <Screen>
+
+      <Slide>
+        <p>"What unusual happened during the experiment?"</p>
+        <TextareaInput
+            :response.sync= "$magpie.measurements.issue"
+          />
+        <button @click="$magpie.saveAndNextScreen();">Submit</button>
+      </Slide>
+
+    </Screen>
 
     <SubmitResultsScreen />
   </Experiment>
 </template>
 
 <script>
-// Load data from csv files as javascript arrays with objects
-import provo_list1 from '../trials/provo_items_list1.tsv';
-import provo_list2 from '../trials/provo_items_list2.tsv';
-import provo_list3 from '../trials/provo_items_list3.tsv';
-import provo_practice from '../trials/provo_items_practice.tsv';
+import test from '../trials/test.tsv';
+import practice from '../trials/practice.tsv';
 import _ from 'lodash';
+
+function interleaveWithFillers(items, fillers) {
+  const I = [...items];  // shadow copy
+  const F = [...fillers];
+
+  if (I.length > 1 && F.length < I.length - 1) {
+    throw new Error(`Need at least ${I.length - 1} fillers; got ${F.length}.`);
+  }
+
+  const separators = F.splice(0, Math.max(0, I.length - 1));
+  const seq = I.length ? [I[0]] : [];
+
+  for (let k = 0; k < separators.length; k++) {
+    seq.push(separators[k], I[k + 1]);
+  }
+
+  const gaps = Array.from({ length: seq.length + 1 }, () => []);
+  while (F.length) {
+    gaps[(Math.random() * gaps.length) | 0].push(F.pop());
+  }
+
+  // Stitch gaps + seq
+  const out = [];
+  for (let i = 0; i < seq.length; i++) {
+    if (gaps[i].length) out.push(...gaps[i]);
+    out.push(seq[i]);
+  }
+  if (gaps[seq.length].length) out.push(...gaps[seq.length]);
+  return out;
+}
 
 export default {
   name: 'App',
   data() {
-    const lists = [provo_list1, provo_list2, provo_list3];
-    const chosenItems = lists[Math.floor(Math.random() * lists.length)]; // randomly choose one of the lists
-    const shuffledItems = _.shuffle(chosenItems); 
-    const trials = _.concat(provo_practice, shuffledItems);
-    // Create a new column in localCoherences called 'response_options'
-    // that concatenates the word in response_true with the two words in response_distractors
-    const updatedTrials = trials.map(trial => {
-      return {
-        ...trial,
-        response_options: _.shuffle(`${trial.response_true}|${trial.response_distractors}`.replace(/ ?["]+/g, "").split("|")),
-      }
-    });
+    const trials = _.concat(practice[1], test);
+    const order = ["Yes", "No"];
+
+    const updatedTrials = trials.map(trial => ({
+      ...trial,
+      response_options: [trial.response_true, trial.response_distractors]
+        .map(s => s.replace(/ ?["]+/g, ''))
+        .sort((a, b) => order.indexOf(a) - order.indexOf(b))
+    }));
+
     return {
-      isCursorMoving: false,
+      hasStarted: false,
+      hasRevealed: false,
       trials: updatedTrials,
-      currentIndex: null,
+      currentIndex: null,              
       showFirstDiv: true,
-      // currentItem: null,
-      mousePosition: {
-          x: 0,
-          y: 0,
-        },
-  }},
-  computed: {
+      mousePosition: { x: 0, y: 0 },
+      _meta: null,
+      _intervalId: null,                 // for cleanup
+      _outsideOnceLogged: false,         // log fallback only once per outside streak
+    };
   },
-  mounted() { 
-    setInterval(this.saveData, 50);
-    },
+  mounted() {
+    this._intervalId = setInterval(this.saveData, 50);
+  },
+  beforeDestroy() {
+    if (this._intervalId) clearInterval(this._intervalId);
+  },
   methods: {
     changeBack() {
-      this.$el.querySelector(".oval-cursor").classList.remove('grow');
-      this.$el.querySelector(".oval-cursor").classList.remove('blank');
-      this.currentIndex = null;
-    },
-    saveData() {
-        if (this.currentIndex !== null) {
-          const currentElement = this.$el.querySelector(`span[data-index="${this.currentIndex}"]`);
-          if (currentElement) {
-            const currentElementRect = currentElement.getBoundingClientRect();
-            $magpie.addTrialData({
-              Experiment: this.$el.querySelector(".experiment_id").value,
-              Condition: this.$el.querySelector(".condition_id").value,
-              ItemId: this.$el.querySelector(".item_id").value,
-              Index: this.currentIndex,
-              Word: currentElement.innerHTML,
-              mousePositionX: this.mousePosition.x,
-              mousePositionY: this.mousePosition.y,
-              wordPositionTop: currentElementRect.top,
-              wordPositionLeft: currentElementRect.left,
-              wordPositionBottom: currentElementRect.bottom,
-              wordPositionRight: currentElementRect.right
-              // wordPositionTop: currentElement.offsetTop,
-              // wordPositionLeft: currentElement.offsetLeft,
-              // wordPositionBottom: currentElement.offsetHeight + currentElement.offsetTop,
-              // wordPositionRight: currentElement.offsetWidth + currentElement.offsetLeft
-          });
-        } else {
-          $magpie.addTrialData({
-              Experiment: this.$el.querySelector(".experiment_id").value,
-              Condition: this.$el.querySelector(".condition_id").value,
-              ItemId: this.$el.querySelector(".item_id").value,
-              Index: this.currentIndex,
-              mousePositionX: this.mousePosition.x,
-              mousePositionY: this.mousePosition.y,
-          });
-          
-        }
-      }},
-    moveCursor(e) {
-      this.isCursorMoving = true;
-      this.$el.querySelector(".oval-cursor").classList.add('grow');
-      let x = e.clientX;
-      let y = e.clientY;
-      const elementAtCursor= document.elementFromPoint(x, y).closest('span');
-      if (elementAtCursor){
-        this.$el.querySelector(".oval-cursor").classList.remove('blank');
-        this.currentIndex = elementAtCursor.getAttribute('data-index');
-      } else {
-        this.$el.querySelector(".oval-cursor").classList.add('blank');
-        const elementAboveCursor = document.elementFromPoint(x, y-3).closest('span');
-        if (elementAboveCursor){
-          this.currentIndex = elementAboveCursor.getAttribute('data-index');
-        } else {
-          this.currentIndex = -1;
-        }
+      const oc = this.$el.querySelector(".oval-cursor");
+      if (oc) {
+        oc.classList.remove('grow');
+        oc.classList.remove('blank');
       }
-      
-      this.$el.querySelector(".oval-cursor").style.left = `${x+12}px`;
-      this.$el.querySelector(".oval-cursor").style.top = `${y-6}px`;
-      this.mousePosition.x = e.clientX;
-      this.mousePosition.y = e.clientY;
-      // this.mousePosition.x = e.offsetX;
-      // this.mousePosition.y = e.offsetY;
+      this.currentIndex = null;          
+      this._outsideOnceLogged = false;  
     },
-    toggleDivs() {
-    this.showFirstDiv = !this.showFirstDiv;
-    this.isCursorMoving = false;
+
+    saveData() {
+      if (!this.hasStarted) return; 
+      const readingContainer = this.$el.querySelector('.readingText');
+      if (!readingContainer) return;
+
+      if (!this._meta) {
+        const listEl = this.$el.querySelector(".list");
+        const itemEl = this.$el.querySelector(".item_id");
+        const condEl = this.$el.querySelector(".condition_id");
+        if (!(listEl && itemEl && condEl)) return;
+        this._meta = {
+          List: listEl.value,
+          ItemId: itemEl.value,
+          Condition: condEl.value,
+        };
+      }
+
+      const idx = this.currentIndex;
+
+      if (idx !== null && idx >= 0) {
+        const currentElement = readingContainer.querySelector(`span[data-index="${idx}"]`);
+        if (currentElement) {
+          const r = currentElement.getBoundingClientRect();
+          $magpie.addTrialData({
+            ...this._meta,
+            Index: idx | 0,
+            Word: currentElement.textContent,
+            mousePositionX: this.mousePosition.x | 0,
+            mousePositionY: this.mousePosition.y | 0,
+            // wordPositionTop: r.top | 0,
+            wordPositionLeft: r.left | 0,
+            // wordPositionBottom: r.bottom | 0,
+            wordPositionRight: r.right | 0
+          });
+          this._outsideOnceLogged = false;
+        }
+        return;
+    }
+      if (idx === -1) {
+        $magpie.addTrialData({
+          ...this._meta,
+          Index: -1,
+          mousePositionX: this.mousePosition.x | 0,
+          mousePositionY: this.mousePosition.y | 0
+        });
+        this._outsideOnceLogged = false;
+        return;
+      }
+
+      if (idx === null && !this._outsideOnceLogged) {
+        $magpie.addTrialData({
+          ...this._meta,
+          Index: null,
+          mousePositionX: this.mousePosition.x | 0,
+          mousePositionY: this.mousePosition.y | 0
+        });
+        this._outsideOnceLogged = true;
+      }
     },
-   //  async turnOnFullScreen() {
-//       if (!document.fullscreenElement) {
-//         try {
-//           await document.documentElement.requestFullscreen();
-//           return true;
-//         } catch (e) {
-//           return false;
-//         }
-//       }
-//       return true;
-//     },
-//     turnOffFullScreen() {
-//       document.exitFullscreen();
-//     },
+
+    moveCursor(e) {
+      if (!this.hasStarted) return;
+      const oc = this.$el.querySelector(".oval-cursor");
+      if (oc && !oc.classList.contains('grow')) oc.classList.add('grow');
+
+      const x = e.clientX;
+      const y = e.clientY;
+
+      let targetSpan = e.target && e.target.closest ? e.target.closest('span') : null;
+
+      if (!targetSpan) {
+        const el = document.elementFromPoint(x, y - 10);
+        targetSpan = el && el.closest ? el.closest('span') : null;
+      }
+
+      if (oc) {
+        if (targetSpan) oc.classList.remove('blank'); else oc.classList.add('blank');
+        oc.style.left = (x + 12) + 'px';
+        oc.style.top  = (y - 6) + 'px';
+      }
+
+      if (targetSpan) {
+        this.hasRevealed = true;
+        this._outsideOnceLogged = false;
+        this.currentIndex = targetSpan.getAttribute('data-index');
+      } else {
+        this.currentIndex = -1;
+      }
+
+      this.mousePosition.x = x;
+      this.mousePosition.y = y;
+    },
+
+    handleRCQButton() {
+      if (!this.hasRevealed) return;
+      $magpie.nextSlide();
+      this.hasStarted = false;
+      this.hasRevealed = false;
+    },
+    startReading() {
+      this.hasStarted = true;
+      this.hasRevealed = false;
+    },
+
     getScreenDimensions() {
       return {
         window_inner_width: window.innerWidth,
@@ -287,6 +348,7 @@ export default {
     }
   },
 };
+
 </script>
 
 
@@ -316,8 +378,8 @@ export default {
     cursor: pointer;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-left: 0;
+    padding-right: 0;
   }
   button {
     position: absolute;
@@ -326,6 +388,7 @@ export default {
   }
   .oval-cursor {
     position: fixed;
+    /* left: 10px; */
     z-index: 2;
     width: 1px;
     height: 1px;
@@ -338,7 +401,7 @@ export default {
   } 
   .oval-cursor.grow.blank {
     width: 80px;
-    height: 13px;
+    height: 38px;
   }
   .oval-cursor.grow {
     width: 102px;
@@ -371,14 +434,33 @@ export default {
     font-weight: 450;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-left: 0;
+    padding-right: 0;
   }
-
   * {
     user-select: none; /* Standard syntax */
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
+    font-family: "Courier", monospace;
     }
+label {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 14px 22px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+/* make the selected text bold + red */
+label input[type="radio"]:checked + span {
+  font-weight: 600;
+  color: #0b3c5d;
+}
+/* highlight the entire selected box */
+label:has(input[type="radio"]:checked) {
+  box-shadow: 0 0 0 3px #0b3c5d inset;
+  border-color: #0b3c5d;
+}
 </style>
