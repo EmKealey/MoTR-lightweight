@@ -1,11 +1,61 @@
 <!-- Window is fixed, 102px, pointer cursor, gradual blurry effect on surrounding words. -->
 <!--  Comprehension questions appear afterwards in the same slide -->
+<script setup>
+  window.onload = function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const prolificID = urlParams.get('prolificID2');
+
+    if (prolificID) {
+      // Update Magpie data
+      if (window.$magpie && window.$magpie.measurements) {
+        window.$magpie.measurements.SubjectID = prolificID;
+      }
+
+      // Also directly update the input field
+      const input = document.querySelector('input[name="TurkID"]');
+      if (input) {
+        input.value = prolificID;
+      }
+    }
+  };
+
+import { ref } from 'vue'
+
+// Get query parameters from current URL
+const params = new URLSearchParams(window.location.search)
+const urlParams = new URLSearchParams(window.location.search);
+  const prolificID = urlParams.get('prolificID');
+  const pid = ref(params.get('prolificID2') || '')
+  // If it exists, store it in magpie
+  if (pid) {
+    window.$magpie = window.$magpie || {};
+    window.$magpie.measurements = window.$magpie.measurements || {};
+    window.$magpie.measurements.SubjectID = pid;
+  }
+
+// Create reactive variables
+
+const cond = ref(params.get('assignedCondition') || '')
+</script>
+</script>
+
 
 <template>
   <Experiment title="Mouse tracking for Reading" translate="no">
+    <Screen title="Confirm your Prolific ID" class="instructions">
+      <p>Welcome to the experiment! Hi Please enter your Prolific ID to continue.</p>
+      <h1>{{ pid }}</h1>
+  <input v-model="pid" />
+  <input v-model="cond" />
+<button 
+  @click="$magpie.addExpData({ pid: pid }); $magpie.nextScreen()">
+  Proceed
+</button>
+
+    </Screen>
 
     <Screen :title="'welcome'" class="instructions" :validations="{
-        SubjectID: {
+        pid: {
           minLength: $magpie.v.minLength(2)
         }
       }">
@@ -16,9 +66,9 @@
           <b> About this study </b>
         </div>
         <p>
-          Welcome to this experiment. Please read the following information carefully. If you have any questions, feel free to contact us.
-        <br><br>
-          <b>What is the study about?</b> You will be participating in a study conducted by the Digital Linguistics Group at the University of Zurich. This research will help us understand how people read.
+          Welcome to Emma's Demo experiment. Please read the following information carefully. If you have any questions, feel free to contact us.
+        <br>
+          <b>What is the study even about??</b> You will be participating in a study conducted by the Digital Linguistics Group at the University of Zurich. This research will help us understand how people read.
         <br><br>
           <b>What do I need to do?</b> You will use the computer mouse to read sentences in English and answer questions about them.
         <br><br>
@@ -42,7 +92,7 @@
         <br>
 
         <tr>
-          <td>Please enter your Prolific ID to continue:&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
+          <td>Please enter your Prolific ID to continue:&nbsp</td><td> <input v-model="pid"/></td>
         </tr>
         <tr></tr>
 
@@ -167,6 +217,28 @@
 </template>
 
 <script>
+// set up URL parameters 
+const getQueryParams = (url) => {
+  let qParams = {};
+  // create a binding tag to use a property called search
+  let anchor = document.createElement('a');
+  // assign the href URL of the anchor tag
+  anchor.href = url;
+  // search property returns URL query string
+  let qStrings = anchor.search.substring(1);
+  let params = qStrings.split('&');
+  for (let i = 0; i < params.length; i++) {
+    let pair = params[i].split('=');
+      qParams[pair[0]] = decodeURIComponent(pair[1]);
+    }
+    return qParams;
+};
+
+let queryString = window.location.search;
+const params = getQueryParams(queryString);
+const pid = ref(params.ProlificID);
+const cond = ref(params.condition)
+
 
 // Load data from csv files as javascript arrays with objects
 // import onestop_zh_practice from '../trials/onestop_zh_practice.tsv';
