@@ -44,9 +44,7 @@ const cond = ref(params.get('assignedCondition') || '')
   <Experiment title="Mouse tracking for Reading" translate="no">
     <Screen title="Confirm your Prolific ID" class="instructions">
       <p>Welcome to the experiment! Hi Please enter your Prolific ID to continue.</p>
-      <h1>{{ pid }}</h1>
-  <input v-model="pid" />
-  <input v-model="cond" />
+ <p> Participant ID </p><input v-model="pid" />
 <button 
   @click="$magpie.addExpData({ pid: pid }); $magpie.nextScreen()">
   Proceed
@@ -55,9 +53,7 @@ const cond = ref(params.get('assignedCondition') || '')
     </Screen>
 
     <Screen :title="'welcome'" class="instructions" :validations="{
-        pid: {
-          minLength: $magpie.v.minLength(2)
-        }
+
       }">
         <!-- <WelcomeScreen /> -->
         <div style="width: 40em; margin: auto;">
@@ -92,15 +88,11 @@ const cond = ref(params.get('assignedCondition') || '')
         <br>
 
         <tr>
-          <td>Please enter your Prolific ID to continue:&nbsp</td><td> <input v-model="pid"/></td>
+          <td>Please confirm your Participant ID to continue:&nbsp</td><td> <input v-model="pid"/></td>
         </tr>
         <tr></tr>
 
         </div>
-          <div v-if="
-            $magpie.measurements.SubjectID&&
-            !$magpie.validateMeasurements.SubjectID.$invalid
-            ">
           <br> By clicking on the button below you consent to participating in this study: <br><br>
           <br />
           <button 

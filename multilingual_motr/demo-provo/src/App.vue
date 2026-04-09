@@ -203,7 +203,7 @@ export default {
     const updatedTrials = trials.map(trial => ({
       ...trial,
       response_options: [trial.response_true, trial.response_distractors]
-        .map(s => s.replace(/ ?["]+/g, ''))
+        .map(s => (s || '').replace(/ ?["]+/g, ''))
         .sort((a, b) => order.indexOf(a) - order.indexOf(b))
     }));
 
