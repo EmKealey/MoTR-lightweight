@@ -21,7 +21,7 @@ import { ref } from 'vue'
 // Get query parameters from current URL
 const urlParams = new URLSearchParams(window.location.search);
   const prolificID = urlParams.get('prolificID');
-  const pid = ref(urlParams.get('prolificID2') || '')
+  const pid = ref(urlParams.get('prolificID2'))
   // If it exists, store it in magpie
   if (pid) {
     window.$magpie = window.$magpie || {};
