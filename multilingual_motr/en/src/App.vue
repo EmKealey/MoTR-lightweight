@@ -448,7 +448,7 @@ export default {
     filter:blur(3px);
   }
   .oval-cursor.grow::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 50%;
     left: 50%;
