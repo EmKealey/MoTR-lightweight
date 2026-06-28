@@ -16,7 +16,7 @@
           <b>Information About this study </b>
         </div>
         <p>
-           Please read the text below carefully.
+           Please read the text below carefully.  Emma is tryihng to make this work but its very hard
           <br><br>
             <b>What is investigated and how?</b> This study will help us learn about how people read. It will take you around 15 minutes to complete.
           <br><br>
