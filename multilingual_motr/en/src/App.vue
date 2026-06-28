@@ -1,13 +1,27 @@
 <!-- Window is fixed, 102px, pointer cursor, gradual blurry effect on surrounding words. -->
 <!--  Comprehension questions appear afterwards in the same slide -->
 <script setup>
+window.onload = function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const prolificID = urlParams.get('prolificID2');
 
+  if (prolificID) {
+    // update magpie data
+    if (this.window.$magpie && this.window.$magpie.measurements) {
+      this.window.$magpie.measurements.SubjectID = prolificID;
+    } 
+
+    const input = document.querySelector('input[v-model="pid"]');
+    if (input) {
+      input.value = prolificID;
+    }
+};
 import { ref } from 'vue'
 
 // Get query parameters from current URL
 const urlParams = new URLSearchParams(window.location.search);
   const prolificID = urlParams.get('prolificID');
-  const pid = ref(params.get('prolificID2') || '')
+  const pid = ref(urlParams.get('prolificID2') || '')
   // If it exists, store it in magpie
   if (pid) {
     window.$magpie = window.$magpie || {};
