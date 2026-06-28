@@ -21,7 +21,7 @@ module.exports = {
   },
   	publicPath:
     process.env.NODE_ENV === 'production'
-      ? '/MoTR-lightweight/multilingual_motr/demo-provo/'
+      ? '/MoTR-lightweight/multilingual_motr/daisy/'
       : '/'
 //   publicPath:
 //     process.env.NODE_ENV === 'production' && process.env.REPO_NAME
