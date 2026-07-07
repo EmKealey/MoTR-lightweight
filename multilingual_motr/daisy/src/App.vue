@@ -1,9 +1,51 @@
 <!-- Window is fixed, 102px, pointer cursor, gradual blurry effect on surrounding words. -->
 <!--  Comprehension questions appear afterwards in the same slide -->
+<script setup>
+  window.onload = function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const prolificID = urlParams.get('prolificID2');
+
+    if (prolificID) {
+      // Update Magpie data
+      if (window.$magpie && window.$magpie.measurements) {
+        window.$magpie.measurements.SubjectID = prolificID;
+      }
+    }
+  };
+
+import { ref } from 'vue'
+
+// Get query parameters from current URL
+const params = new URLSearchParams(window.location.search)
+const urlParams = new URLSearchParams(window.location.search);
+  const prolificID = urlParams.get('prolificID');
+  const pid = ref(params.get('prolificID2') || '')
+  // If it exists, store it in magpie
+  if (pid) {
+    window.$magpie = window.$magpie || {};
+    window.$magpie.measurements = window.$magpie.measurements || {};
+    window.$magpie.measurements.SubjectID = pid;
+  }
+
+// Create reactive variables
+
+const cond = ref(params.get('assignedCondition') || '')
+</script>
+</script>
 
 <template>
   <Experiment title="Mouse tracking for Reading -- Daisy Chaining" translate="no">
 
+    <Screen title="Confirm your Participant ID" class="instructions">
+      <p>Welcome to the experiment! Hi Please confirm your Participant ID is accurate below: </p>
+   
+  <input v-model="pid" />
+
+<button 
+  @click="$magpie.addExpData({ pid: pid }); $magpie.nextScreen()">
+  Proceed
+</button>
+</Screen>
     <Screen :title="'welcome'" class="instructions" :validations="{
         SubjectID: {
           minLength: $magpie.v.minLength(2)
@@ -16,7 +58,7 @@
           <b>Information About this study </b>
         </div>
         <p>
-           Please read the text below carefully.  Emma is tryihng to make this work but its very hard
+           Please read the text below carefully.
           <br><br>
             <b>What is investigated and how?</b> This study will help us learn about how people read. It will take you around 15 minutes to complete.
           <br><br>
@@ -46,16 +88,6 @@
           <div style="padding-left: 30px">• I understand that I can stop participating at any moment.</div>
         <br>
 
-        <tr>
-          <td>Please enter your Prolific ID or any string to continue:&nbsp</td><td><input name="ProlID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
-        </tr>
-        <tr></tr>
-
-        </div>
-          <div v-if="
-            $magpie.measurements.SubjectID&&
-            !$magpie.validateMeasurements.SubjectID.$invalid
-            ">
           <br> By clicking on the button below you consent to participating in this study: <br><br>
           <br />
           <button 
@@ -153,6 +185,14 @@
         <button @click="$magpie.saveAndNextScreen();">Submit</button>
       </Slide>
 
+      <Slide>
+        <p>"your completion URL is: holder"</p>
+        <TextareaInput
+            :response.sync= "$magpie.measurements.issue"
+          />
+        <button @click="$magpie.saveAndNextScreen();">Submit</button>
+      </Slide>
+
     </Screen>
 
     <SubmitResultsScreen />
@@ -163,6 +203,7 @@
 import test from '../trials/test.tsv';
 import practice from '../trials/practice.tsv';
 import _ from 'lodash';
+import { Screen } from 'magpie-base';
 
 function interleaveWithFillers(items, fillers) {
   const I = [...items];  // shadow copy
