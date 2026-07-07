@@ -29,7 +29,7 @@ const urlParams = new URLSearchParams(window.location.search);
 
 // Create reactive variables
 
-const cond = ref(params.get('assignedCondition') || '')
+
 </script>
 </script>
 
