@@ -1,12 +1,12 @@
 export default {
-  experimentId: '100',
-  serverUrl: 'https://re-veil-backend-83c42dec8100.herokuapp.com//',
-  socketUrl: 'wss://re-veil-backend-83c42dec8100.herokuapp.com//socket',
+  experimentId: '3',
+serverUrl: 'https://testappegk.gigalixirapp.com',
+socketUrl: 'wss://testappegk.gigalixirapp.com/socket',
   // this will be used in prolific mode
-  completionUrl: 'https://app.prolific.com/submissions/complete?cc=CGYULV9Z',
-  contactEmail: 'cui.ding@uzh.ch',
+  completionUrl: 'https://github.com/EmKealey/nor/labels',
+  contactEmail: 'kealey@usc.edu',
   uploadUrl: 'https://drive.switch.ch/index.php/s/wlfkWdmKr6eoqSH',
   // Either 'debug', 'directLink' or 'prolific'
   mode: 'prolific',
-  language: 'zh'
+  language: 'en'
 };
