@@ -1,84 +1,91 @@
 <!-- Window is fixed, 102px, pointer cursor, gradual blurry effect on surrounding words. -->
 <!--  Comprehension questions appear afterwards in the same slide -->
+<script setup>
+import { ref } from 'vue'
+
+// Get query parameters from current URL
+const params = new URLSearchParams(window.location.search)
+  const pid = ref(params.get('id') || '')
+  // If it exists, store it in magpie
+  if (pid) {
+    window.$magpie = window.$magpie || {};
+    window.$magpie.measurements = window.$magpie.measurements || {};
+    window.$magpie.measurements.SubjectID = pid;
+  }
+
+</script>
 
 <template>
   <Experiment title="Mouse tracking for Reading" translate="no">
 
-    <Screen :title="'欢迎'" class="instructions" :validations="{
+    <Screen :title="'welcome'" class="instructions" :validations="{
         SubjectID: {
           minLength: $magpie.v.minLength(2)
         }
       }">
         <!-- <WelcomeScreen /> -->
-        <div style="width: 40em; margin: auto;">
+        <div style="width: 90%; margin: auto;">
 
         <div style="background-color: lightgrey; padding: 10px;">
-            <b> 关于本研究 </b>
+          <b>Information About this study </b>
         </div>
         <p>
-            HI Emmas changes are live!! 欢迎参与我们的研究项目。请阅读如下信息。如有任何疑问，请联系我们。
-        <br><br>
-          <b>研究内容是什么？</b> 您将参与由苏黎世大学数字语言学小组进行的研究。本研究将帮助我们了解人们如何阅读。
-        <br><br>
-         <b>我需要做什么？</b> 您将通过移动鼠标来阅读一些文本，并回答相关问题。
-        <br><br>
-          <b>我的权利是什么？</b> 在参与过程中，您可以随时关闭网页退出本研究，无需说明理由，也不会有任何不利影响。
-        <br><br>
-          <b>我的数据会如何被收集和使用？</b> 当您阅读我们提供的文本时，鼠标在屏幕上的位置会被记录。本研究的数据将保持完全匿名。我们将严格遵守保密原则。
-        <br><br>
-          <b> 我对数据有何权利？ </b> 您可以随时要求获取、修改、限制或删除您的数据。为此，请联系如下负责人。
-
-        <br><br>
-          <b> 联系方式： </b> Cui Ding [cui.ding@uzh.ch] Department of Computational Linguistics, Andreasstr. 15, CH-8050 Zurich, Switzerland <br>
+           Please read the text below carefully.
+          <br><br>
+            <b>What is investigated and how?</b> This study will help us learn about how people read. It will take you around 15 minutes to complete.
+          <br><br>
+            <b>Who can participate?</b> You can participate only if you are an adult native speaker of English.
+          <br><br>
+          <b>What am I supposed to do as a participant?</b> In this study, you will use the computer mouse to read sentences in English and answer questions about them.
+          <br><br>
+            <b>What are my rights during participation?</b> Your participation in this study is voluntary. If you choose to participate, you may change your mind and leave the study at any time by closing the web page.
+          <br><br>
+            <b>Will I be compensated?</b> If you complete the study, you will be compensated with the amount specified on prolific.co.
+          <br><br>
+            <b>What data is collected from me and how is it used?</b> During this study, we will track the position of your mouse on screen. The data from this study may be presented at scientific conferences and published in scientific journals, as well as in online repositories. All data will remain anonymous.
+          <br><br>
+            <b> What are my rights to my personal data? </b> You can request information about the personal data collected from you at any time and without giving reasons. You can also request that it be rectified, handed over to you, barred for processing or erased. To do so, please contact us via prolific messages.
         </p>
 
         <br>
         <div style="background-color: lightgrey; padding: 10px;">
-            <b> 同意书 </b>
+          <b> Consent Form </b>
         </div>
         <br>
-        我，作为参与者，通过点击下方按钮确认： <br>
-        <div style="padding-left: 30px">• 我已阅读并理解关于本研究的信息。 </div>
-        <div style="padding-left: 30px">• 我符合参与研究的条件，并了解需要遵守的要求和规则。 </div>
-        <div style="padding-left: 30px">• 我有足够的时间来决定是否参与。 </div>
-        <div style="padding-left: 30px">• 我自愿参与本研究，并同意按照如上所述使用我的个人数据。</div>
+          I, the participant, confirm by clicking the button below: <br>
+          <div style="padding-left: 30px"> • I have read and understood the study information. My questions have been answered completely and to my satisfaction. </div>
+          <div style="padding-left: 30px">• I comply with the inclusion and exclusion criteria for participation described above. I am aware of the requirements and restrictions to be observed during the study. </div>
+          <div style="padding-left: 30px">• I have had enough time to decide about my participation. </div>
+          <div style="padding-left: 30px">• I participate in this study voluntarily and consent that my personal data be used as described above.</div>
+          <div style="padding-left: 30px">• I understand that I can stop participating at any moment.</div>
         <br>
 
-          <tr>
-          <td>请输入您的 Prolific ID 以继续：&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
-          </tr>
-          <tr>
+        <tr>
+          <td>Please enter today's date to continue:&nbsp</td><td><input name="date" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
+        </tr>
+        <tr></tr>
 
-          </tr>
-          </div>
+        </div>
           <div v-if="
             $magpie.measurements.SubjectID&&
             !$magpie.validateMeasurements.SubjectID.$invalid
             ">
-          <br> 点击下方按钮即表示您同意参与本研究： <br><br>
+          <br> By clicking on the button below you consent to participating in this study: <br><br>
           <br />
           <button 
             @click="$magpie.addExpData({ SubjectId: $magpie.measurements.SubjectID}); $magpie.nextScreen()">
-            继续
+            Proceed
           </button>
 
-          </div>
+        </div>
      </Screen>
 
-
-
-    <InstructionScreen :title="'说明'" :button-text="'继续'">
-<!-- 
-      <p>请在实验期间使用“全屏模式”：
-        <a href="javascript:void(0)" @click="turnOnFullScreen">全屏模式</a>
-      </p>
- -->
-      <p></p>
-      <p>本研究的灵感来自于豆瓣上一位网友的偶然经历：该网友的打印机出了点问题，打印出来的文字只能显示上面一半或下面一半，然后网友发现仅有一半的文字似乎也不影响阅读。不过，仅有上半部分和仅有下半部分的文字，哪一种更容易阅读呢？
-        这个问题引起了众多网友的兴趣和讨论，也被编选入“豆瓣社区小报”。对这个问题的回答可谓见仁见智，但尚无定论。</p>
-      <p>汉字作为目前世界上唯一在用的象形文字，究竟哪一部分承担的信息量更大呢？同样充满好奇的我们试图通过本研究来科学地回答这个问题。</p>
-      <p>接下来您将阅读一些文本并回答问题。与正常阅读不同的是，这些文本已被模糊处理。为使其清晰可见，请将鼠标移动到文本上：有些文本仅会显示上半部分文字，有些仅显示下半部分，有些会完整显示。请努力阅读或根据部分字体信息猜测并理解文本。阅读完毕后请点击“回答问题”来作答。</p>
-      <p>准备好了吗？让我们一起解开这个有趣现象背后的秘密吧！</p>
+     <InstructionScreen :title="'Instructions'" :button-text="'Continue'">
+      <div style="width: 80%; margin: auto;">
+        <p></p>
+        <p>In this study, you will read short texts and answer questions about them. However, unlike in normal reading, the texts will be blurred. In order to bring the text into focus move your mouse over it. Take as much time to read the text as you need in order to understand it. When you are done reading, answer the question at the bottom and click “next” to move on.</p>
+        <p>Let’s get started!</p>
+      </div>
     </InstructionScreen>
 
     <template v-for="(trial, i) of trials">
@@ -86,229 +93,279 @@
         <Slide class="text_slide">
           <form>
             <input type="hidden" class="item_id" :value="trial.item_id">
-            <input type="hidden" class="stimulus_id" :value="trial.stimulus_id">
-            <input type="hidden" class="page_id" :value="trial.page_id">
-            <input type="hidden" class="question_id" :value="trial.question_id">
-            <input type="hidden" class="wordRealPart" :value="trial.wordRevealPart">
+            <input type="hidden" class="condition_id" :value="trial.condition_id">
+            <input type="hidden" class="list" :value="trial.group">
+            <input type="hidden" class="question_type" :value="trial.question_type">
           </form>
           <div class="oval-cursor"></div>
           <template>
-            <div class="readingText" @mousemove="moveCursor" @mouseleave="changeBack">
-              <div v-for="(para, paraIndex) of trial.text.split('@#@')">
-                <template v-for="(word, index) of para.split('')">
-                  <span v-if="trial.wordRevealPart==='l'" style="clip-path: inset(50% 0 0 0);" :key="index" :data-index="`${paraIndex}-${index}`">{{word}}</span>
-                  <span v-else-if="trial.wordRevealPart==='u'" style="clip-path: inset(0 0 50% 0);" :key="index" :data-index="`${paraIndex}-${index}`">{{word}}</span>
-                  <span v-else :key="index" :data-index="`${paraIndex}-${index}`">{{word}}</span>
-                </template>
-              </div>
+            <div v-if="hasStarted" class="readingText" style= "top:5%;" @mousemove="moveCursor" @mouseleave="changeBack">
+              <template v-for="(word, index) of trial.text.split(' ')">
+                <span :key="index" :data-index="index" >
+                  {{ word }}
+                </span>
+              </template>
             </div>
-            <div class="blurry-layer" style="opacity: 0.3; filter: blur(5px); transition: all 0.3s linear 0s;"> 
-              <!-- {{trial.text}} -->
-              <div v-for="(para, paraIndex) of trial.text.split('@#@')">
-                <template v-for="(word, index) of para.split('')">
-                  <span v-if="trial.wordRevealPart==='l'" style="clip-path: inset(50% 0 0 0);" :key="index" :data-index="`${paraIndex}-${index}`">{{word}}</span>
-                  <span v-else-if="trial.wordRevealPart==='u'" style="clip-path: inset(0 0 50% 0);" :key="index" :data-index="`${paraIndex}-${index}`">{{word}}</span>
-                  <span v-else :key="index" :data-index="`${paraIndex}-${index}`">{{word}}</span>
-                </template>
-              </div>
+            <div v-if="hasStarted" class="blurry-layer" style="opacity: 0.3; filter: blur(3.5px); transition: all 0.3s linear 0s; top:5%;"> 
+              {{trial.text}}
             </div>
           </template>
+          <!-- Start button -->
+          <button style="bottom:78%; left: -5%; transform: translate(-50%, -50%)" @click="startReading" v-if="!hasStarted">
+            Start
+          </button>
 
-          <button style= "bottom: 25%; transform: translate(-50%, -50%)" @click="trial.question_id == null ? saveAndDisable() : handleRCQButton()" :disabled="!hasRead">
-                  {{ trial.question_id == null ? '下一页': '回答问题' }}
+          <button v-if="hasStarted" style= "bottom:65%; left: 95%; transform: translate(-50%, -50%)" @click="handleRCQButton" :disabled="!hasRevealed">
+            Done
           </button>
         </Slide>
 
-        <Slide class="question_slide" v-if="trial.question_id">
-          <div class="radio-options">
+        <Slide class="question_slide">
+          <div class="radio-options" style="padding-top: 4%;">
             <form>
-              <input type="hidden" class="question_id" :value="trial.question_id">
-              <p>{{ trial.question}}</p>
-                <template v-for='(option, index) of trial.response_options'>
-                  <input :id="'opt_'+index" type="radio" :value="option" name="opt"  v-model="$magpie.measurements.response" />&nbsp&nbsp{{option}}<br/>
-                </template>
+              <!-- comprehension questions and the response options -->
+              <div>{{ trial.question }}</div>
+              <template v-for='(option, index) of trial.response_options'>
+                <label style="cursor:pointer; user-select:none; border:1px solid #ccc; border-radius:8px; padding:14px 22px; display:inline-flex; align-items:center;margin-right:12px;">
+                  <input type="radio" :value="option" name="opt" v-model="$magpie.measurements.response" style="display:none;">
+                  <span style="display:block;">{{ option }}</span>
+                </label>
+              </template>
             </form>
           </div>
-          <!-- <button v-if="$magpie.measurements.response"  style="transform: translate(-50%, -50%)" @click="$magpie.saveMeasurements(); $magpie.measurements.response=''; j !== trial.length - 1 ? $magpie.nextSlide() : $magpie.nextScreen()"> -->
-            <button v-if="$magpie.measurements.response" style="bottom: 25%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen()">
-            {{ '下一页' }}
+
+          <button v-if="$magpie.measurements.response" style="transform: translate(-50%, -50%); bottom:55%" @click="$magpie.saveAndNextScreen()">
+            Next
           </button>
         </Slide>
-
       </Screen>
     </template>
-<Screen>
-  <p>1. 您觉得只显示文字上半部分和只显示文字下半部分，哪种更容易阅读？</p>
-    <MultipleChoiceInput
-        :response.sync= "$magpie.measurements.difficulty"
-        orientation="horizontal"
-        :options="['只显示上半部分', '只显示下半部分', '难易相当']" />
-  <br>
-  <br>
-  <p>2. 您在这个实验中使用了哪种输入设备？</p>
-    <MultipleChoiceInput
-        :response.sync= "$magpie.measurements.device"
-        orientation="horizontal"
-        :options="['鼠标', '触控板', '触控笔', '其他']" />
-  <br>
-  <br>
-  <p>3. 您在这个实验中使用了什么电脑操作系统？</p>
-    <MultipleChoiceInput
-        :response.sync= "$magpie.measurements.os"
-        orientation="horizontal"
-        :options="['微软Windows', '苹果MacOS', '其它']" />
-  <button style= "bottom: 5%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">提交</button>
-</Screen>
+
+    <Screen>
+      <p>1. Which input device are you using for this experiment?</p>
+        <MultipleChoiceInput
+            :response.sync= "$magpie.measurements.device"
+            orientation="horizontal"
+            :options="['Mouse', 'Trackpad', 'Stylus', 'Other']" />
+      <br>
+      <br>
+      <p>2. What operating system did you use during this experiment?</p>
+        <MultipleChoiceInput
+            :response.sync="$magpie.measurements.os"
+            orientation="horizontal"
+            :options="['Microsoft Windows', 'Apple macOS', 'Other']" />
+      <button style= "bottom: 5%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">Next</button>
+    </Screen>
+
+    <Screen>
+
+      <Slide>
+        <p>"What unusual happened during the experiment?"</p>
+        <TextareaInput
+            :response.sync= "$magpie.measurements.issue"
+          />
+        <button @click="$magpie.saveAndNextScreen();">Submit</button>
+      </Slide>
+
+    </Screen>
+    <Screen>
+      <Screen title = "Next Task" class="instructions">
+      <p> Please click on the link below to be redirected to the next task: </p>
+
+      <a 
+  :href="'https://emkealey.github.io/MoTR-lightweight/multilingual_motr/daisy/?prolificID2=' + pid"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  click here
+</a>
 
     <SubmitResultsScreen />
+    </Screen>
+    </Screen>
   </Experiment>
 </template>
 
 <script>
-
-// Load data from csv files as javascript arrays with objects
-// import onestop_zh_practice from '../trials/onestop_zh_practice.tsv';
-import onestop_zh from '../trials/onestop_zh.tsv';
+import test from '../trials/test.tsv';
+import practice from '../trials/practice.tsv';
 import _ from 'lodash';
 
-  finalUrl = new URL("https:emkealey.github.io/MoTR-lightweight/multilingual_motr/daisy/");
-  finalUrl.searchParams.set("SubjectId", SubjectId);
+
+function interleaveWithFillers(items, fillers) {
+  const I = [...items];  // shadow copy
+  const F = [...fillers];
+
+  if (I.length > 1 && F.length < I.length - 1) {
+    throw new Error(`Need at least ${I.length - 1} fillers; got ${F.length}.`);
+  }
+
+  const separators = F.splice(0, Math.max(0, I.length - 1));
+  const seq = I.length ? [I[0]] : [];
+
+  for (let k = 0; k < separators.length; k++) {
+    seq.push(separators[k], I[k + 1]);
+  }
+
+  const gaps = Array.from({ length: seq.length + 1 }, () => []);
+  while (F.length) {
+    gaps[(Math.random() * gaps.length) | 0].push(F.pop());
+  }
+
+  // Stitch gaps + seq
+  const out = [];
+  for (let i = 0; i < seq.length; i++) {
+    if (gaps[i].length) out.push(...gaps[i]);
+    out.push(seq[i]);
+  }
+  if (gaps[seq.length].length) out.push(...gaps[seq.length]);
+  return out;
+}
 
 export default {
   name: 'App',
   data() {
-    const groupedItems = _.groupBy(onestop_zh, 'stimulus_id');
-    const shuffledGroups = _.shuffle(Object.values(groupedItems));
-    const shuffledItems = _.flatMap(shuffledGroups);
-    // const trials = _.concat(onestop_zh_practice, shuffledItems);
-    const trials = shuffledItems;
+    const trials = _.concat(practice[1], test);
+    const order = ["Yes", "No"];
 
-    const wordRevealParts = ['f', 'u', 'l'] // which part of the word to reveal: full, upper half, lower half
-    const shuffledWordRevealParts = _.shuffle(Array.from({ length: trials.length }, (_, i) => wordRevealParts[i % wordRevealParts.length]));
-    // Ensure first trial gets 'f'
-    if (shuffledWordRevealParts[0] !== 'f') {
-      const fIndex = shuffledWordRevealParts.indexOf('f');
-      if (fIndex !== -1) {
-        // Swap the first item with the first occurrence of 'f'
-        [shuffledWordRevealParts[0], shuffledWordRevealParts[fIndex]] = [shuffledWordRevealParts[fIndex], shuffledWordRevealParts[0]];
-      }
-    }
-    const updatedTrials = trials.map((trial, index) => ({
+    const updatedTrials = trials.map(trial => ({
       ...trial,
-      response_options: _.shuffle([trial.response_true, trial.distractor_1, trial.distractor_2, trial.distractor_3]),
-      wordRevealPart: shuffledWordRevealParts[index]
+      response_options: [trial.response_true, trial.response_distractors]
+        .map(s => (s || '').replace(/ ?["]+/g, ''))
+        .sort((a, b) => order.indexOf(a) - order.indexOf(b))
     }));
-    
-    // const wordRevealPartsAssigned = updatedTrials.map(trial => trial.wordRevealPart);
-    // console.log('All assigned wordRevealParts:', wordRevealPartsAssigned);
-    // const counts = _.countBy(wordRevealPartsAssigned);
-    // console.log('Counts of each wordRevealPart:', counts);
-    
 
     return {
-      hasRead: false,
-      // isCursorMoving: false,
+      hasStarted: false,
+      hasRevealed: false,
       trials: updatedTrials,
-      currentIndex: null,
-      // currentItem: null,
-      mousePosition: {
-          x: 0,
-          y: 0,
-        },
-  }},
-  computed: {
+      currentIndex: null,              
+      showFirstDiv: true,
+      mousePosition: { x: 0, y: 0 },
+      _meta: null,
+      _intervalId: null,                 // for cleanup
+      _outsideOnceLogged: false,         // log fallback only once per outside streak
+    };
   },
-  mounted() { 
-    setInterval(this.saveData, 50);
-    },
+  mounted() {
+    this._intervalId = setInterval(this.saveData, 50);
+  },
+  beforeDestroy() {
+    if (this._intervalId) clearInterval(this._intervalId);
+  },
   methods: {
     changeBack() {
-      this.$el.querySelector(".oval-cursor").classList.remove('grow');
-      this.$el.querySelector(".oval-cursor").classList.remove('blank');
-      this.currentIndex = null;
-    },
-    saveData() {
-        if (this.currentIndex !== null) {
-          const currentElement = this.$el.querySelector(`span[data-index="${this.currentIndex}"]`);
-          if (currentElement) {
-            const currentElementRect = currentElement.getBoundingClientRect();
-            $magpie.addTrialData({
-              Stimulus: this.$el.querySelector(".stimulus_id").value,
-              // Condition: this.$el.querySelector(".condition_id").value,
-              ItemId: this.$el.querySelector(".item_id").value,
-              PageId: this.$el.querySelector(".page_id").value,
-              Index: this.currentIndex,
-              Word: currentElement.innerHTML,
-              mousePositionX: this.mousePosition.x,
-              mousePositionY: this.mousePosition.y,
-              // wordPositionTop: currentElementRect.top,
-              // wordPositionLeft: currentElementRect.left,
-              // wordPositionBottom: currentElementRect.bottom,
-              // wordPositionRight: currentElementRect.right,
-              wordRevealPart: this.$el.querySelector(".wordRealPart").value,
-              // wordPositionTop: currentElement.offsetTop,
-              // wordPositionLeft: currentElement.offsetLeft,
-              // wordPositionBottom: currentElement.offsetHeight + currentElement.offsetTop,
-              // wordPositionRight: currentElement.offsetWidth + currentElement.offsetLeft
-          });
-        } else {
-          $magpie.addTrialData({
-              Stimulus: this.$el.querySelector(".stimulus_id").value,
-              // Condition: this.$el.querySelector(".condition_id").value,
-              ItemId: this.$el.querySelector(".item_id").value,
-              PageId: this.$el.querySelector(".page_id").value,
-              Index: this.currentIndex,
-              mousePositionX: this.mousePosition.x,
-              mousePositionY: this.mousePosition.y,
-              wordRevealPart: this.$el.querySelector(".wordRealPart").value,
-          });
-          
-        }
-      }},
-    moveCursor(e) {
-      this.hasRead = true;
-      let oval = this.$el.querySelector(".oval-cursor");
-      // this.$el.querySelector(".oval-cursor").classList.add('grow');
-      let x = e.clientX;
-      let y = e.clientY;
-
-      const elementAtCursor= document.elementFromPoint(x, y).closest('span');
-      if (elementAtCursor){
-        oval.classList.add('grow');
-        this.currentIndex = elementAtCursor.getAttribute('data-index');
-      } else {
-        const elementAboveCursor = document.elementFromPoint(x, y-9).closest('span');
-        if (elementAboveCursor){
-          oval.classList.add('grow');
-          this.currentIndex = elementAboveCursor.getAttribute('data-index');
-        } else {
-          const elementAboveCursor = document.elementFromPoint(x, y-15).closest('span');
-          if (elementAboveCursor){
-            oval.classList.add('grow');
-            this.currentIndex = elementAboveCursor.getAttribute('data-index');
-          } else {
-            oval.classList.remove('grow');
-            this.currentIndex = -1;
-          }
-        }
+      const oc = this.$el.querySelector(".oval-cursor");
+      if (oc) {
+        oc.classList.remove('grow');
+        oc.classList.remove('blank');
       }
-      oval.style.left = `${x}px`;
-      oval.style.top = `${y-9}px`;
-
-      // console.log(this.currentIndex);
-      this.mousePosition.x = e.clientX;
-      this.mousePosition.y = e.clientY;
-      // this.mousePosition.x = e.offsetX;
-      // this.mousePosition.y = e.offsetY;
+      this.currentIndex = null;          
+      this._outsideOnceLogged = false;  
     },
+
+    saveData() {
+      if (!this.hasStarted) return; 
+      const readingContainer = this.$el.querySelector('.readingText');
+      if (!readingContainer) return;
+
+      if (!this._meta) {
+        const listEl = this.$el.querySelector(".list");
+        const itemEl = this.$el.querySelector(".item_id");
+        const condEl = this.$el.querySelector(".condition_id");
+        if (!(listEl && itemEl && condEl)) return;
+        this._meta = {
+          List: listEl.value,
+          ItemId: itemEl.value,
+          Condition: condEl.value,
+        };
+      }
+
+      const idx = this.currentIndex;
+
+      if (idx !== null && idx >= 0) {
+        const currentElement = readingContainer.querySelector(`span[data-index="${idx}"]`);
+        if (currentElement) {
+          const r = currentElement.getBoundingClientRect();
+          $magpie.addTrialData({
+            ...this._meta,
+            Index: idx | 0,
+            Word: currentElement.textContent,
+            mousePositionX: this.mousePosition.x | 0,
+            mousePositionY: this.mousePosition.y | 0,
+            // wordPositionTop: r.top | 0,
+            wordPositionLeft: r.left | 0,
+            // wordPositionBottom: r.bottom | 0,
+            wordPositionRight: r.right | 0
+          });
+          this._outsideOnceLogged = false;
+        }
+        return;
+    }
+      if (idx === -1) {
+        $magpie.addTrialData({
+          ...this._meta,
+          Index: -1,
+          mousePositionX: this.mousePosition.x | 0,
+          mousePositionY: this.mousePosition.y | 0
+        });
+        this._outsideOnceLogged = false;
+        return;
+      }
+
+      if (idx === null && !this._outsideOnceLogged) {
+        $magpie.addTrialData({
+          ...this._meta,
+          Index: null,
+          mousePositionX: this.mousePosition.x | 0,
+          mousePositionY: this.mousePosition.y | 0
+        });
+        this._outsideOnceLogged = true;
+      }
+    },
+
+    moveCursor(e) {
+      if (!this.hasStarted) return;
+      const oc = this.$el.querySelector(".oval-cursor");
+      if (oc && !oc.classList.contains('grow')) oc.classList.add('grow');
+
+      const x = e.clientX;
+      const y = e.clientY;
+
+      let targetSpan = e.target && e.target.closest ? e.target.closest('span') : null;
+
+      if (!targetSpan) {
+        const el = document.elementFromPoint(x, y - 10);
+        targetSpan = el && el.closest ? el.closest('span') : null;
+      }
+
+      if (oc) {
+        if (targetSpan) oc.classList.remove('blank'); else oc.classList.add('blank');
+        oc.style.left = (x + 12) + 'px';
+        oc.style.top  = (y - 6) + 'px';
+      }
+
+      if (targetSpan) {
+        this.hasRevealed = true;
+        this._outsideOnceLogged = false;
+        this.currentIndex = targetSpan.getAttribute('data-index');
+      } else {
+        this.currentIndex = -1;
+      }
+
+      this.mousePosition.x = x;
+      this.mousePosition.y = y;
+    },
+
     handleRCQButton() {
+      if (!this.hasRevealed) return;
       $magpie.nextSlide();
-    this.hasRead = false;
+      this.hasStarted = false;
+      this.hasRevealed = false;
     },
-
-    saveAndDisable() {
-    $magpie.saveAndNextScreen();
-    this.hasRead = false;
+    startReading() {
+      this.hasStarted = true;
+      this.hasRevealed = false;
     },
 
     getScreenDimensions() {
@@ -319,6 +376,7 @@ export default {
     }
   },
 };
+
 </script>
 
 
@@ -334,9 +392,7 @@ export default {
     width: 100%;
     height: auto;
     font-size: 18px;
-    line-height: 50px;
-    /* font-size: 22px;
-    line-height: 50px; */
+    line-height: 40px;
   }
   .debugResults{
     width: 100%;
@@ -350,9 +406,8 @@ export default {
     cursor: pointer;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 11%;
-    padding-right: 11%;
-    align-items: center; 
+    padding-left: 0;
+    padding-right: 0;
   }
   button {
     position: absolute;
@@ -361,6 +416,7 @@ export default {
   }
   .oval-cursor {
     position: fixed;
+    /* left: 10px; */
     z-index: 2;
     width: 1px;
     height: 1px;
@@ -373,15 +429,13 @@ export default {
   } 
   .oval-cursor.grow.blank {
     width: 80px;
-    height: 13px;
+    height: 38px;
   }
   .oval-cursor.grow {
-    width: 50px;
-    height: 40px; 
+    width: 102px;
+    height: 38px;
     border-radius: 50%;
-    /* border-radius: 0; */
-    /* border: 0.1px solid red;  */
-    /* box-shadow: 30px 0 8px -4px rgba(255, 255, 255, 0.1), -30px 0 8px -4px rgba(255, 255, 255, 0.1); */
+    box-shadow: 30px 0 8px -4px rgba(255, 255, 255, 0.1), -30px 0 8px -4px rgba(255, 255, 255, 0.1);
     background-color: rgba(255, 255, 255, 0.3);
     background-blend-mode: screen;
     pointer-events: none;
@@ -408,27 +462,33 @@ export default {
     font-weight: 450;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 11%;
-    padding-right: 11%;
-    align-items: center; 
+    padding-left: 0;
+    padding-right: 0;
   }
-
-  span{
-    /* height: 100%; */
-    /* display: inline-block; */
-    text-align: center;
-    /* vertical-align: bottom; */
-    align-items: center;
-    /* background-color: yellow; */
-    /* border: 0.1px, solid, black; */
-    /* clip-path: inset(0 0 0 0); */
-  }
-
-
   * {
     user-select: none; /* Standard syntax */
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
+    font-family: "Courier", monospace;
     }
+label {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 14px 22px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+/* make the selected text bold + red */
+label input[type="radio"]:checked + span {
+  font-weight: 600;
+  color: #0b3c5d;
+}
+/* highlight the entire selected box */
+label:has(input[type="radio"]:checked) {
+  box-shadow: 0 0 0 3px #0b3c5d inset;
+  border-color: #0b3c5d;
+}
 </style>
