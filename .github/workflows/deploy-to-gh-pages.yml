@@ -14,7 +14,6 @@ jobs:
         folder:
           - multilingual_motr/zh/
           - multilingual_motr/nor/
-          - multilingual_motr/en/
           - multilingual_motr/demo-provo/
           - multilingual_motr/daisy/
 
