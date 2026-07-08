@@ -171,6 +171,9 @@
 import onestop_zh from '../trials/onestop_zh.tsv';
 import _ from 'lodash';
 
+  finalUrl = new URL("https:emkealey.github.io/MoTR-lightweight/multilingual_motr/daisy/");
+  finalUrl.searchParams.set("SubjectId", SubjectId);
+
 export default {
   name: 'App',
   data() {
