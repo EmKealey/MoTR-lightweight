@@ -92,6 +92,7 @@ const params = new URLSearchParams(window.location.search)
       <Screen :key="i" class="main_screen" :progress="i / trials.length">
         <Slide class="text_slide">
           <form>
+            <input type="hidden" class="pid" :value="$magpie.measurements.pid">
             <input type="hidden" class="item_id" :value="trial.item_id">
             <input type="hidden" class="condition_id" :value="trial.condition_id">
             <input type="hidden" class="list" :value="trial.group">
@@ -230,7 +231,7 @@ export default {
 
     const updatedTrials = trials.map(trial => ({
       ...trial,
-      response_options: [trial.response_true, trial.response_distractors]
+      response_options: [trial.response_true, trial.response_distractor1, trial.response_distractor2]
         .map(s => (s || '').replace(/ ?["]+/g, ''))
         .sort((a, b) => order.indexOf(a) - order.indexOf(b))
     }));
