@@ -75,7 +75,7 @@ const params = new URLSearchParams(window.location.search)
             $magpie.measurements.Confirmation&&
             !$magpie.validateMeasurements.Confirmation.$invalid
             ">
-          <br> By clicking on the button below you consent to participating in this study: <br><br>
+          <br> By clicking on the button below you consent to participating in this study: (Thanks!) <br><br>
           <br />
           <button 
             @click="$magpie.addExpData({ pid: pid }); $magpie.nextScreen()">
