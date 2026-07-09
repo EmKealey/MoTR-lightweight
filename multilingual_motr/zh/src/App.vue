@@ -5,12 +5,12 @@ import { ref } from 'vue'
 
 // Get query parameters from current URL
 const params = new URLSearchParams(window.location.search)
-  const pid = ref(params.get('id') || '')
+  const pid = ref(params.get('id'))
   // If it exists, store it in magpie
   if (pid) {
     window.$magpie = window.$magpie || {};
     window.$magpie.measurements = window.$magpie.measurements || {};
-    window.$magpie.measurements.pid = pid;
+    window.$magpie.measurements.SubjectID = pid;
   }
 
 </script>
@@ -19,7 +19,7 @@ const params = new URLSearchParams(window.location.search)
   <Experiment title="Mouse tracking for Reading" translate="no">
 
     <Screen :title="'welcome'" class="instructions" :validations="{
-        SubjectID: {
+        Confirmation: {
           minLength: $magpie.v.minLength(2)
         }
       }">
@@ -29,6 +29,11 @@ const params = new URLSearchParams(window.location.search)
         <div style="background-color: lightgrey; padding: 10px;">
           <b>Information About this study </b>
         </div>
+<screen>
+      <p>Welcome to the experiment! Hi Please confirm your Participant ID is accurate below: </p>
+   
+  <input v-model="pid" />
+  </screen>
         <p>
            Please read the text below carefully.
           <br><br>
@@ -61,24 +66,24 @@ const params = new URLSearchParams(window.location.search)
         <br>
 
         <tr>
-          <td>Please enter today's date to continue:&nbsp</td><td><input name="date" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
+          <td>Please enter today's date to continue:&nbsp</td><td><input name="date" type="text" class="obligatory" v-model="$magpie.measurements.Confirmation"/></td>
         </tr>
         <tr></tr>
 
         </div>
           <div v-if="
-            $magpie.measurements.SubjectID&&
-            !$magpie.validateMeasurements.SubjectID.$invalid
+            $magpie.measurements.Confirmation&&
+            !$magpie.validateMeasurements.Confirmation.$invalid
             ">
           <br> By clicking on the button below you consent to participating in this study: <br><br>
           <br />
           <button 
-            @click="$magpie.addExpData({ SubjectId: $magpie.measurements.SubjectID}); $magpie.nextScreen()">
-            Proceed
-          </button>
+            @click="$magpie.addExpData({ SubjectId: $magpie.measurements.SubjectID});$magpie.addExpData({ pid: pid }); $magpie.nextScreen()">
+  Proceed </button> 
 
         </div>
      </Screen>
+
 
      <InstructionScreen :title="'Instructions'" :button-text="'Continue'">
       <div style="width: 80%; margin: auto;">

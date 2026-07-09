@@ -12,6 +12,6 @@ socketUrl: 'wss://testappegk.gigalixirapp.com/socket',
   contactEmail: 'kealey@usc.edu',
   uploadUrl: 'https://drive.switch.ch/index.php/s/wlfkWdmKr6eoqSH',
   // Either 'debug', 'directLink' or 'prolific'
-  mode: 'prolific',
+  mode: 'directLink',
   language: 'en'
 };
