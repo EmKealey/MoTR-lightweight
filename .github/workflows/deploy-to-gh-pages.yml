@@ -13,7 +13,6 @@ jobs:
       matrix:
         folder:
           - multilingual_motr/zh/
-          - multilingual_motr/nor/
           - multilingual_motr/demo-provo/
           - multilingual_motr/daisy/
 
