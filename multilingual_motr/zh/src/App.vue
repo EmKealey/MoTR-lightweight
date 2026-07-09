@@ -78,7 +78,7 @@ const params = new URLSearchParams(window.location.search)
           <br> By clicking on the button below you consent to participating in this study: <br><br>
           <br />
           <button 
-            @click="$magpie.addExpData({ SubjectId: $magpie.measurements.SubjectID});$magpie.addExpData({ pid: pid }); $magpie.nextScreen()">
+            @click="$magpie.addExpData({ pid: pid }); $magpie.nextScreen()">
   Proceed </button> 
 
         </div>
