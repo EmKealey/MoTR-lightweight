@@ -10,7 +10,7 @@ const params = new URLSearchParams(window.location.search)
   if (pid) {
     window.$magpie = window.$magpie || {};
     window.$magpie.measurements = window.$magpie.measurements || {};
-    window.$magpie.measurements.SubjectID = pid;
+    window.$magpie.measurements.pid = pid;
   }
 
 </script>
@@ -92,7 +92,6 @@ const params = new URLSearchParams(window.location.search)
       <Screen :key="i" class="main_screen" :progress="i / trials.length">
         <Slide class="text_slide">
           <form>
-            <input type="hidden" class="pid" :value="$magpie.measurements.pid">
             <input type="hidden" class="item_id" :value="trial.item_id">
             <input type="hidden" class="condition_id" :value="trial.condition_id">
             <input type="hidden" class="list" :value="trial.group">
