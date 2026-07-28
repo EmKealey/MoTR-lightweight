@@ -30,41 +30,11 @@ const params = new URLSearchParams(window.location.search)
           <b>Information About this study </b>
         </div>
 <screen>
-      <p>Welcome to the experiment! Hi Please confirm your Participant ID is accurate below: </p>
+      <p> Welcome to the reading portion of the experiment! Please confirm your Participant ID is accurate below: </p>
    
   <input v-model="pid" />
   </screen>
         <p>
-           Please read the text below carefully.
-          <br><br>
-            <b>What is investigated and how?</b> This study will help us learn about how people read. It will take you around 15 minutes to complete.
-          <br><br>
-            <b>Who can participate?</b> You can participate only if you are an adult native speaker of English.
-          <br><br>
-          <b>What am I supposed to do as a participant?</b> In this study, you will use the computer mouse to read sentences in English and answer questions about them.
-          <br><br>
-            <b>What are my rights during participation?</b> Your participation in this study is voluntary. If you choose to participate, you may change your mind and leave the study at any time by closing the web page.
-          <br><br>
-            <b>Will I be compensated?</b> If you complete the study, you will be compensated with the amount specified on prolific.co.
-          <br><br>
-            <b>What data is collected from me and how is it used?</b> During this study, we will track the position of your mouse on screen. The data from this study may be presented at scientific conferences and published in scientific journals, as well as in online repositories. All data will remain anonymous.
-          <br><br>
-            <b> What are my rights to my personal data? </b> You can request information about the personal data collected from you at any time and without giving reasons. You can also request that it be rectified, handed over to you, barred for processing or erased. To do so, please contact us via prolific messages.
-        </p>
-
-        <br>
-        <div style="background-color: lightgrey; padding: 10px;">
-          <b> Consent Form </b>
-        </div>
-        <br>
-          I, the participant, confirm by clicking the button below: <br>
-          <div style="padding-left: 30px"> • I have read and understood the study information. My questions have been answered completely and to my satisfaction. </div>
-          <div style="padding-left: 30px">• I comply with the inclusion and exclusion criteria for participation described above. I am aware of the requirements and restrictions to be observed during the study. </div>
-          <div style="padding-left: 30px">• I have had enough time to decide about my participation. </div>
-          <div style="padding-left: 30px">• I participate in this study voluntarily and consent that my personal data be used as described above.</div>
-          <div style="padding-left: 30px">• I understand that I can stop participating at any moment.</div>
-        <br>
-
         <tr>
           <td>Please enter today's date to continue:&nbsp</td><td><input name="date" type="text" class="obligatory" v-model="$magpie.measurements.Confirmation"/></td>
         </tr>
@@ -88,7 +58,12 @@ const params = new URLSearchParams(window.location.search)
      <InstructionScreen :title="'Instructions'" :button-text="'Continue'">
       <div style="width: 80%; margin: auto;">
         <p></p>
-        <p>In this study, you will read short texts and answer questions about them. However, unlike in normal reading, the texts will be blurred. In order to bring the text into focus move your mouse over it. Take as much time to read the text as you need in order to understand it. When you are done reading, answer the question at the bottom and click “next” to move on.</p>
+        <p>In this part of the study, you will read sentences and answer questions about them. However, unlike in normal reading, the words will be blurred. </p>
+          
+          <p> In order to bring the words into focus, press the start button on the left side of the screen and move your mouse over the words. Take as much time to read the text as you need in order to understand it. When you are done reading, click the 'done' button on the right side of the screen. You will then be asked to answer a comprehension question about the sentence you just read. 
+          Click “next” to move on.</p>
+          <p> We will start with a few practice sentences first, so you can get familiar with the program.</p>
+
         <p>Let’s get started!</p>
       </div>
     </InstructionScreen>
