@@ -4,8 +4,8 @@
 import { ref } from 'vue'
 
 // Get query parameters from current URL
-const params = new URLSearchParams(window.location.search)
-  const pid = ref(params.get('id'))
+const params = new URLSearchParams(window.location.search)  // create a function named params that searches the URL of the current window/ page
+  const pid = ref(params.get('id')) // creates a variable named pid that stores the value of the query parameter 'id' from the URL. If URL has a different parameter (e.g., 'prolificID'), change the text in inner most parentheses.
   // If it exists, store it in magpie
   if (pid) {
     window.$magpie = window.$magpie || {};
@@ -15,6 +15,7 @@ const params = new URLSearchParams(window.location.search)
 
 </script>
 
+//Welcome Screen
 <template>
   <Experiment title="Mouse tracking for Reading" translate="no">
 
@@ -32,8 +33,8 @@ const params = new URLSearchParams(window.location.search)
 <screen>
       <p> Welcome to the reading portion of the experiment! Please confirm your Participant ID is accurate below: </p>
    
-  <input v-model="pid" />
-  </screen>
+  <input v-model="pid" /> 
+  </screen> 
         <p>
         <tr>
           <td>Please enter today's date to continue:&nbsp</td><td><input name="date" type="text" class="obligatory" v-model="$magpie.measurements.Confirmation"/></td>
@@ -62,11 +63,84 @@ const params = new URLSearchParams(window.location.search)
           
           <p> In order to bring the words into focus, press the start button on the left side of the screen and move your mouse over the words. Take as much time to read the text as you need in order to understand it. When you are done reading, click the 'done' button on the right side of the screen. You will then be asked to answer a comprehension question about the sentence you just read. 
           Click “next” to move on.</p>
-          <p> We will start with a few practice sentences first, so you can get familiar with the program.</p>
 
-        <p>Let’s get started!</p>
+          <p> The video below shows an example of this task: </p>
+          <button 
+            @click="$magpie.nextScreen()">
+  Next</button> 
+            <screen>
+<video width="100%" height="auto" controls src=video/MoTRDemo.mov autoplay @ended="$magpie.nextSlide()"> </video>
+            </screen>
+            <screen>
+        <p>Let’s get started! First, you will see a few practice trials to familiarize yourself with the task. Click 'start' below to begin:</p> 
+
+        </screen>
       </div>
     </InstructionScreen>
+
+    // practice trials loop
+ <template v-for="(trial, i) of trials_practice">
+      <Screen :key="i" class="main_screen" :progress="i / trials_practice.length">
+        <Slide class="text_slide">
+          <form>
+            <input type="hidden" class="item_id" :value="trial.item_id">
+            <input type="hidden" class="condition_id" :value="trial.condition_id">
+            <input type="hidden" class="list" :value="trial.group">
+            <input type="hidden" class="question_type" :value="trial.question_type">
+          </form>
+          <div class="oval-cursor"></div>
+          <template>
+            <div v-if="hasStarted" class="readingText" style= "top:5%;" @mousemove="moveCursor" @mouseleave="changeBack">
+              <template v-for="(word, index) of trial.text.split(' ')">
+                <span :key="index" :data-index="index" >
+                  {{ word }}
+                </span>
+              </template>
+            </div>
+            <div v-if="hasStarted" class="blurry-layer" style="opacity: 0.3; filter: blur(3.5px); transition: all 0.3s linear 0s; top:5%;"> 
+              {{trial.text}}
+            </div>
+          </template>
+          <!-- Start button -->
+          <button style="bottom:78%; left: -5%; transform: translate(-50%, -50%)" @click="startReading" v-if="!hasStarted">
+            Start
+          </button>
+
+          <button v-if="hasStarted" style= "bottom:65%; left: 95%; transform: translate(-50%, -50%)" @click="handleRCQButton" :disabled="!hasRevealed">
+            Done
+          </button>
+        </Slide>
+
+        <Slide class="question_slide">
+          <div class="radio-options" style="padding-top: 4%;">
+            <form>
+              <!-- comprehension questions and the response options -->
+              <div>{{ trial.question }}</div>
+              <template v-for='(option, index) of trial.response_options'>
+                <label style="cursor:pointer; user-select:none; border:1px solid #ccc; border-radius:8px; padding:14px 22px; display:inline-flex; align-items:center;margin-right:12px;">
+                  <input type="radio" :value="option" name="opt" v-model="$magpie.measurements.response" style="display:none;">
+                  <span style="display:block;">{{ option }}</span>
+                </label>
+              </template>
+            </form>
+          </div>
+
+          <button v-if="$magpie.measurements.response" style="transform: translate(-50%, -50%); bottom:55%" @click="$magpie.saveAndNextScreen()">
+            Next
+          </button>
+        </Slide>
+      </Screen>
+    </template>
+
+    
+    <Screen :title="'Practice Session is over'" class="instructions">
+      <p>You have completed the training! Now you can proceed to the main study. </p>
+      <p>Please click the button below to begin.</p> 
+      <button style="transform: translate(-50%, -50%)" @click=" $magpie.nextScreen()">
+            Advance / Continue
+      </button>
+    </Screen>
+
 
     <template v-for="(trial, i) of trials">
       <Screen :key="i" class="main_screen" :progress="i / trials.length">
@@ -140,7 +214,7 @@ const params = new URLSearchParams(window.location.search)
     <Screen>
 
       <Slide>
-        <p>"What unusual happened during the experiment?"</p>
+        <p>What unusual happened during the experiment?</p>
         <TextareaInput
             :response.sync= "$magpie.measurements.issue"
           />
@@ -150,7 +224,7 @@ const params = new URLSearchParams(window.location.search)
     </Screen>
     <Screen>
       <Screen title = "Next Task" class="instructions">
-      <p> Please click on the link below to be redirected to the next task: </p>
+      <p> You have completed the reading task for this experiment. There is one more task to complete. Please wait until your results have been submitted to the server. Then, click on the link below to continue to the final task: </p>
 
       <a 
   :href="'https://emkealey.github.io/MoTR-lightweight/multilingual_motr/daisy/?prolificID2=' + pid"
@@ -160,7 +234,11 @@ const params = new URLSearchParams(window.location.search)
   click here
 </a>
 
-    <SubmitResultsScreen />
+    <SubmitResultsScreen 
+    title="Thanks!"
+  text="Click the button below to submit your responses."
+  buttonText="Submit Experiment"
+/>
     </Screen>
     </Screen>
   </Experiment>
@@ -205,12 +283,20 @@ function interleaveWithFillers(items, fillers) {
 export default {
   name: 'App',
   data() {
-    const trials = _.concat(practice[1], test);
+    const trials = test;
     const order = ["Yes", "No"];
+
+const updatedPractice = practice.map(trial => ({
+  ...trial,
+  response_options: _.shuffle([
+    trial.response_true,
+    trial.response_distractor1,
+    trial.response_distractor2])
+}));
 
     const updatedTrials = trials.map(trial => ({
       ...trial,
-      response_options: [trial.response_true, trial.response_distractor1, trial.response_distractor2]
+      response_options: _.shuffle([trial.response_true, trial.response_distractor1, trial.response_distractor2])
         .map(s => (s || '').replace(/ ?["]+/g, ''))
         .sort((a, b) => order.indexOf(a) - order.indexOf(b))
     }));
@@ -218,6 +304,7 @@ export default {
     return {
       hasStarted: false,
       hasRevealed: false,
+      trials_practice: updatedPractice,
       trials: updatedTrials,
       currentIndex: null,              
       showFirstDiv: true,
