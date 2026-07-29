@@ -222,7 +222,11 @@ const params = new URLSearchParams(window.location.search)  // create a function
       </Slide>
 
     </Screen>
-    <Screen>
+    //Emma's addition: final screen with link to next task
+
+<Screen> 
+    <SubmitResultsScreen 
+  
       <Screen title = "Next Task" class="instructions">
       <p> You have completed the reading task for this experiment. There is one more task to complete. Please wait until your results have been submitted to the server. Then, click on the link below to continue to the final task: </p>
 
@@ -234,11 +238,6 @@ const params = new URLSearchParams(window.location.search)  // create a function
   click here
 </a>
 
-    <SubmitResultsScreen 
-    title="Thanks!"
-  text="Click the button below to submit your responses."
-  buttonText="Submit Experiment"
-/>
     </Screen>
     </Screen>
   </Experiment>
