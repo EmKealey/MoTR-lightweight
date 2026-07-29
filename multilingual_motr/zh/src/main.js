@@ -12,7 +12,7 @@ Vue.use(VueKonva, { prefix: 'Canvas' });
 // Load magpie components
 Vue.use(VueMagpie, magpieConfig);
 
-const nextTaskURL = "https://emkealey.github.io/MoTR-lightweight/multilingual_motr/daisy/?prolificID2=";
+window.nextTaskURL = "https://usc.qualtrics.com/jfe/form/SV_6fjhmLL8c3oLNOu?id=";
 
 // start app
 new Vue({
