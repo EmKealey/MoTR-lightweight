@@ -224,25 +224,9 @@ const params = new URLSearchParams(window.location.search)  // create a function
     </Screen>
     //Emma's addition: final screen with link to next task
 
-<Screen> 
-    <SubmitResultsScreen 
-  
-      <Screen title = "Next Task" class="instructions">
-      <p> You have completed the reading task for this experiment. There is one more task to complete. Please wait until your results have been submitted to the server. Then, click on the link below to continue to the final task: </p>
-
-      <a 
-  :href="'https://emkealey.github.io/MoTR-lightweight/multilingual_motr/daisy/?prolificID2=' + pid"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  click here
-</a>
-
-    </Screen>
-    </Screen>
+    <SubmitResultsScreen/>
   </Experiment>
 </template>
-
 <script>
 import test from '../trials/test.tsv';
 import practice from '../trials/practice.tsv';
