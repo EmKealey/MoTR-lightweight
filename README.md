@@ -88,3 +88,4 @@ python3 postprocessing.py --in_folder data2 --trial_file trials/provo_items.tsv 
 
 This call takes a folder which can contain multiple raw MoTR data files called `data2` and the trial data file `provo_items.tsv` in the folder `trials`, output the divided raw data files, files for fixation sequences, files for reading measures into `./divide_by_reader`,`./fixations`, `./reading_metrics`, `../stimuli`, respectively. It will extract fixations ranging from 200 ms to 3000 ms.
 
+# LosDataTest
